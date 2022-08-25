@@ -30,7 +30,6 @@ const PrincipalScreen = () => {
 	const [data, setData] = useState({"firstName": "", "lastName":"","birthday": "" ,"gender": "","cellPhone": "","address":"","profession":"","incomes":""});
 
 	const handleChange =  (e) => {
-		debugger
 		setData({
 			...data, [e.target.name]: e.target.value
 		})
@@ -38,11 +37,63 @@ const PrincipalScreen = () => {
 
 	const handleSubmit =  (e) => {
 		e.preventDefault();
-		 setData({"firstName": "", "lastName":"","birthday": "" ,"gender": "","cellPhone": "","address":"","profession":"","incomes":""})
-	 	setInfo({ ...info, datafromTable:[...info.datafromTable, data]})
-		
-		
+		const err = validate();
+		if(!err){
+			setData({"firstName": "", "lastName":"","birthday": "" ,"gender": "","cellPhone": "","address":"","profession":"","incomes":""})
+	 		setInfo({ ...info, datafromTable:[...info.datafromTable, data]})
+		}
 	};
+
+	const validate = () => {
+		let isError = false;
+		const errors = {
+		  firstNameError: "",
+		  lastNameError: "",
+		  dateError:"",
+		  genderError:"",
+		  cellphoneError: "",
+		  addressError: "",
+		  professionError: "",
+		  incomesError:""
+		};
+	
+		if (data.firstName.length === 0) {
+		  isError = true;
+		  errors.firstNameError = "First Name Field Required";
+		}
+		if (data.lastName.length === 0) {
+			isError = true;
+			errors.lastNameError = "Last Name Field Required";
+		}
+		if (data.birthday.length === 0) {
+			isError = true;
+			errors.dateError = "Birthday Field Required";
+		}	
+		if (data.gender.length === 0) {
+			isError = true;
+			errors.genderError = "Gender Field Required";
+		}
+		if (data.cellPhone.length === 0) {
+			isError = true;
+			errors.cellphoneError = "Cellphone Field Required";
+		}
+		if (data.address.length === 0) {
+			isError = true;
+			errors.addressError = "Address Home Field Required";
+		}
+		if (data.profession.length === 0) {
+			isError = true;
+			errors.professionError = "Profession Field Required";
+		}	
+		if (data.incomes.length === 0) {
+			isError = true;
+			errors.incomesError = "Incomes Field Required";
+		}
+		setData({
+			...data, errors
+		})	
+		return isError;
+	  };
 
 	const [info, setInfo] = useState(() => {return dataFrom ? dataFrom :  {
 		datafromTable: [],query: "", columnToQuery: "firstName"
@@ -97,6 +148,8 @@ const PrincipalScreen = () => {
 								value={data.firstName}
 								onChange={e => handleChange(e)}
 								style={{ float : 'right'}}
+								error={data?.errors?.firstNameError}
+								helperText={data?.errors?.firstNameError && `${data?.errors?.firstNameError}`}
 								/>
 							</div>
 							<div className="col-lg-6" >
@@ -104,8 +157,10 @@ const PrincipalScreen = () => {
 								name="lastName"
 								label={t("body.lastName")}
 								value={data.lastName}
-								onChange={e => handleChange(e)}
+								onChange={e => handleChange(e)}		
 								style={{ float : 'left'}}
+								error={data?.errors?.lastNameError}
+								helperText={data?.errors?.lastNameError && `${data?.errors?.lastNameError}`}
 								/>
 							</div>
 						</div>
@@ -117,6 +172,8 @@ const PrincipalScreen = () => {
 								value={data.birthday}
 								onChange={e => handleChange(e)}
 								style={{ float : 'right', width: "223px"}}
+								error={data?.errors?.dateError}
+								helperText={data?.errors?.dateError && `${data?.errors?.dateError}`}
 								/>
 							</div>
 							<div className="col-lg-6" >
@@ -129,7 +186,8 @@ const PrincipalScreen = () => {
 								label={t("body.select")}
 								onChange={e => handleChange(e)}
 								style={{ float : 'left', width: "223px"}}
-								
+								error={data?.errors?.genderError}
+								helperText={data?.errors?.genderError && `${data?.errors?.genderError}`}
 								>
 								<MenuItem value={t("body.none")}>
 									<em>{t("body.none")}</em>
@@ -146,10 +204,13 @@ const PrincipalScreen = () => {
 							<TextField
 								name="cellPhone"
 								label={t("body.cellphone")}
+								inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
 								floatingLabelText="CellPhone"
 								value={data.cellPhone}
 								onChange={e => handleChange(e)}
 								style={{ float : 'right'}}
+								error={data?.errors?.cellphoneError}
+								helperText={data?.errors?.cellphoneError && `${data?.errors?.cellphoneError}`}
 								/>
 							</div>
 							<div className="col-lg-6" >
@@ -160,6 +221,8 @@ const PrincipalScreen = () => {
 								value={data.address}
 								onChange={e => handleChange(e)}
 								style={{ float : 'left'}}
+								error={data?.errors?.addressError}
+								helperText={data?.errors?.addressError && `${data?.errors?.addressError}`}
 								/>
 							</div>
 						</div>
@@ -171,15 +234,20 @@ const PrincipalScreen = () => {
 								value={data.profession}
 								onChange={e => handleChange(e)}
 								style={{ float : 'right'}}
+								error={data?.errors?.professionError}
+								helperText={data?.errors?.professionError && `${data?.errors?.professionError}`}
 								/>
 							</div>
 							<div className="col-lg-6">
 							<TextField
 								name="incomes"
 								label={t("body.incomes")}
+								inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
 								value={data.incomes}
 								onChange={e => handleChange(e)}
 								style={{ float : 'left'}}
+								error={data?.errors?.incomesError}
+								helperText={data?.errors?.incomesError && `${data?.errors?.incomesError}`}
 								/>
 							</div>
 						</div>

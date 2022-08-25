@@ -18,7 +18,7 @@ const row = (
     </TableRow>
   )
 };
-
+// eslint-disable-next-line
 export default ({
   data,
   header
@@ -31,7 +31,8 @@ export default ({
             <div
               style={{
                 display: "flex",
-                alignItems: "center"
+                alignItems: "center",
+                color:"white"
               }}
             >
               <span>{x.name}</span>
