@@ -1,6 +1,6 @@
 {
     "header": {
-        "hello": "Test Unicomer",
+        "hello": "Unicomer Jamaica",
         "form": "Enter Input Data",
         "description" : "Language",
         "language": "English"
@@ -18,7 +18,10 @@
         "send": "Send",
         "find": "Find",
         "select": "Select a Column",
-        "findClient": "Find potential clients"
+        "findClient": "Find potential clients",
+        "none":"None",
+        "male":"Male",
+        "female":"Female"
     },
     "countries": {
         "london": "London",

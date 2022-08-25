@@ -12,9 +12,7 @@ import Table from "../../components/Table"
 import orderBy from "lodash/orderBy";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import FormHelperText from '@mui/material/FormHelperText';
 import Select from '@mui/material/Select';
-
 const PrincipalScreen = () => {
 	const {
 		WeatherForm: { dataFrom, language },
@@ -32,6 +30,7 @@ const PrincipalScreen = () => {
 	const [data, setData] = useState({"firstName": "", "lastName":"","birthday": "" ,"gender": "","cellPhone": "","address":"","profession":"","incomes":""});
 
 	const handleChange =  (e) => {
+		debugger
 		setData({
 			...data, [e.target.name]: e.target.value
 		})
@@ -69,15 +68,11 @@ const PrincipalScreen = () => {
 								{t("header.hello")}
 							</Grid>
 						</div>
-						<div className="col-lg-2" style={{ marginTop: '20px'}}>
-							<Button variant="contained"  onClick={() =>selectLanguaje("es")} className="margin">ES</Button>
+						<div className="col-lg-8" style={{ marginTop: '20px', textAlign:"right"}}>
+						{ t("header.description")} : {t("header.language")  } 
+						<img src={language === "es" ? spain : uk} alt="flag"  style={{marginRight: "20px", marginLeft:"20px"}}/>
+							<Button variant="contained"  onClick={() =>selectLanguaje("es")} className="margin" style={{marginRight: "20px"}}>ES</Button>
 							<Button variant="contained"  onClick={() =>selectLanguaje("en")} >EN</Button>
-						</div>
-						<div className="col-lg-2" style={{ marginTop: '20px'}}>
-							{ t("header.description")} : {t("header.language")  }  
-						</div>
-						<div className="col-lg-2" style={{ marginTop: '20px'}}>
-							<img src={language === "es" ? spain : uk} alt="flag" />
 						</div>
 					</div>
 				</div>
@@ -101,7 +96,6 @@ const PrincipalScreen = () => {
 								label={t("body.firstName")}
 								value={data.firstName}
 								onChange={e => handleChange(e)}
-								floatingLabelFixed
 								style={{ float : 'right'}}
 								/>
 							</div>
@@ -111,7 +105,6 @@ const PrincipalScreen = () => {
 								label={t("body.lastName")}
 								value={data.lastName}
 								onChange={e => handleChange(e)}
-								floatingLabelFixed
 								style={{ float : 'left'}}
 								/>
 							</div>
@@ -123,19 +116,29 @@ const PrincipalScreen = () => {
 								type="date"
 								value={data.birthday}
 								onChange={e => handleChange(e)}
-								floatingLabelFixed
-								style={{ float : 'right'}}
+								style={{ float : 'right', width: "223px"}}
 								/>
 							</div>
 							<div className="col-lg-6" >
-							<TextField
+							
+							<Select
+								labelId="demo-simple-select-helper-label"
+								id="demo-simple-select-helper"
 								name="gender"
-								label={t("body.gender")}
 								value={data.gender}
+								label={t("body.select")}
 								onChange={e => handleChange(e)}
-								floatingLabelFixed
-								style={{ float : 'left'}}
-								/>
+								style={{ float : 'left', width: "223px"}}
+								
+								>
+								<MenuItem value={t("body.none")}>
+									<em>{t("body.none")}</em>
+								</MenuItem>
+								<MenuItem   value={t("body.male")}>{t("body.male")}</MenuItem>
+								<MenuItem  value={t("body.female")}>{t("body.female")}</MenuItem>
+								</Select>
+							
+								
 							</div>
 						</div>
 						<div className="row" style={{ marginBottom : '10px'}}>
@@ -146,7 +149,6 @@ const PrincipalScreen = () => {
 								floatingLabelText="CellPhone"
 								value={data.cellPhone}
 								onChange={e => handleChange(e)}
-								floatingLabelFixed
 								style={{ float : 'right'}}
 								/>
 							</div>
@@ -157,7 +159,6 @@ const PrincipalScreen = () => {
 								floatingLabelText="Address"
 								value={data.address}
 								onChange={e => handleChange(e)}
-								floatingLabelFixed
 								style={{ float : 'left'}}
 								/>
 							</div>
@@ -169,7 +170,6 @@ const PrincipalScreen = () => {
 								label={t("body.profession")}
 								value={data.profession}
 								onChange={e => handleChange(e)}
-								floatingLabelFixed
 								style={{ float : 'right'}}
 								/>
 							</div>
@@ -179,7 +179,6 @@ const PrincipalScreen = () => {
 								label={t("body.incomes")}
 								value={data.incomes}
 								onChange={e => handleChange(e)}
-								floatingLabelFixed
 								style={{ float : 'left'}}
 								/>
 							</div>
@@ -190,9 +189,7 @@ const PrincipalScreen = () => {
 						</div>
 						</div>
 							</div>
-
-						</div>
-						
+						</div>						
 					</form>
 
 					<div className="row" style={{ marginBottom : '10px'}}>
@@ -202,8 +199,7 @@ const PrincipalScreen = () => {
 								name="Query"
 								label={t("body.find")}
 								value={info.query}
-                				onChange={e => setInfo({ ...info, query: e.target.value })}
-								
+                				onChange={e => setInfo({ ...info, query: e.target.value })}							
 								/>
 						</div>
 						<div className="col-lg-6">
@@ -214,6 +210,7 @@ const PrincipalScreen = () => {
 								value={info.columnToQuery}
 								label={t("body.select")}
 								onChange={e => setInfo({ ...info, columnToQuery: e.target.value })}
+								style={{width: "223px"}}
 							>
 							<MenuItem value="">
 								<em>{t("body.none")}</em>
@@ -227,7 +224,6 @@ const PrincipalScreen = () => {
 							<MenuItem value="profession">{t("body.profession")}</MenuItem>
 							<MenuItem value="incomes">{t("body.incomes")}</MenuItem>
 							</Select>
-							<FormHelperText>{t("body.select")}</FormHelperText>
 						</div>
 
 					</div>
