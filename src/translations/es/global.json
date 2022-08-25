@@ -1,0 +1,27 @@
+{
+    "header": {
+        "hello": "Test Unicomer",
+        "form": "Ingrese Datos de Entrada",
+        "description" : "Idioma",
+        "language": "Español"
+    },
+    "body":{
+        "firstName": "Nombre",
+        "lastName": "Apellido",
+        "birthday": "Cumpleaños",
+        "gender": "Genero",
+        "cellphone": "Telefono",
+        "address": "Direccion",
+        "profession": "Profesion",
+        "incomes": "Ingresos",
+        "send": "Enviar",
+        "find": "Buscar",
+        "select": "Selecciona una columna",
+        "findClient": "Buscar posibles clientes"
+    },
+    "countries": {
+        "london": "Londres",
+        "singapore": "Singapur",
+        "toronto": "Toronto"
+    }
+}

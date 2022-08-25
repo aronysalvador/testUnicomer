@@ -1,0 +1,28 @@
+{
+    "header": {
+        "hello": "Test Unicomer",
+        "form": "Enter Input Data",
+        "description" : "Language",
+        "language": "English"
+
+    },
+    "body":{
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "birthday": "Birthday",
+        "gender": "Gender",
+        "cellphone": "Cellphone",
+        "address": "Address Home",
+        "profession": "Profession",
+        "incomes": "Incomes",
+        "send": "Send",
+        "find": "Find",
+        "select": "Select a Column",
+        "findClient": "Find potential clients"
+    },
+    "countries": {
+        "london": "London",
+        "singapore": "Singapore",
+        "toronto": "Toronto"
+    }
+}
